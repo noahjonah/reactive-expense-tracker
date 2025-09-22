@@ -1,69 +1,50 @@
-# React + TypeScript + Vite
+# 💰 Reactive Expense Tracker
+> This is for tracking expenses easily with a clean React + TypeScript app. Just Learning
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![React](https://img.shields.io/badge/React-18-blue?logo=react)](https://reactjs.org/)  
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/)  
+[![Zod](https://img.shields.io/badge/Validation-Zod-green)](https://zod.dev/)  
+[![React Hook Form](https://img.shields.io/badge/Forms-ReactHookForm-orange)](https://react-hook-form.com/)  
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-5-purple?logo=bootstrap)](https://getbootstrap.com/)  
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+A simple **expense tracker app** built with **React**, **TypeScript**, **Zod**, **React Hook Form**, and **Bootstrap**.  
+This app allows logging daily expenses, categorize them, and keep track of totals — with the ability to filter and delete items.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🚀 Features
+- Add expenses with **description, amount, and category**  
+- Form validation using **Zod + React Hook Form**  
+- Responsive UI with **Bootstrap**  
+- Delete expenses dynamically  
+- Filter expenses by category  
+- Calculates total expenses  
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## App Looks
+<img width="884" height="885" alt="image" src="https://github.com/user-attachments/assets/c4cc3b22-80be-42e8-945b-a1e0210a4f56" />
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🛠️ Tech Stack
+- **React** (with TypeScript)  
+- **Zod** (form validation)  
+- **React Hook Form**  
+- **Bootstrap** (styling)  
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+##  Future Improvements
+ - Edit existing expenses
+ - Save data in localStorage or a database
+ - Add charts/graphs for better visualization
+ - Dark mode support
+ - Improve mobile UI/UX
+
+
+**Just Learning ...**
