@@ -28,10 +28,10 @@ function ExpenseForm() {
     resolver: zodResolver(validationsSchema),
   });
 
-  let [expense, setExpense] = useState({});
+  let [expenses, setExpense] = useState({});
 
   // Data submition logic
-  const onSubmit = (data: FieldValues) => setExpense((expense = data));
+  const onSubmit = (data: FieldValues) => setExpense((expenses = data));
 
   return (
     <>

@@ -1,29 +1,22 @@
 
-
-interface ExpenseTableProps {
-  expense: { description: string; amount: number; categories: string };
+// Defining the Structure of the shape object
+interface ExpenseObjShape {
+  id: number;
+  description: string;
+  amount: number;
+  category: string;
 }
 
-function ExpenseTable({ expense }: ExpenseTableProps) {
-  console.log(expense);
+interface ExpenseTableProps {
+  expenses: ExpenseObjShape[];
+  onDelete: (id: number) => void;
+}
+
+function ExpenseTable({ expenses, onDelete }: ExpenseTableProps) {
+  console.log(expenses);
 
   return (
-    <div className="container mt-3">
-      <form className="mb-4">
-        {/* Category Dropdown Filter */}
-        <fieldset>
-          <label htmlFor="category-filter" className="mt-20 form-label">
-            Filter Expenses by Categories::
-          </label>
-          <select id="category-filter" className="form-select">
-            <option value="">All Categories</option>
-            <option value="1">Stationaries</option>
-            <option value="2">Food Stuff</option>
-            <option value="3">Cleaning Materials</option>
-            <option value="4">Transport</option>
-          </select>
-        </fieldset>
-      </form>
+    <>
       {/* Expenses Table */}
       <table className="table table-bordered">
         <thead>
@@ -35,21 +28,41 @@ function ExpenseTable({ expense }: ExpenseTableProps) {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>{expense.description}</td>
-            <td>$ {expense.amount}</td>
-            <td>{expense.categories}</td>
-            <td>
-              <button className="btn btn-danger">DELETE</button>
-            </td>
-          </tr>
+          {/* Mapping each expense in expense object to a table row */}
+          {expenses.map((expense) => (
+            <tr key={expense.id}>
+              <td>{expense.description}</td>
+              <td>$ {expense.amount}</td>
+              <td>{expense.category}</td>
+              <td>
+                <button
+                  className="btn btn-outline-danger"
+                  onClick={() => onDelete(expense.id)}
+                >
+                  DELETE
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+        <tfoot>
           <tr>
             <td>Total</td>
-            <td>$ 5.00</td>
+            <td>
+              ${/* Reduced method for objects in javascript */}
+              {expenses
+                .reduce(
+                  (accumulator, expense) => expense.amount + accumulator,
+                  0
+                )
+                .toFixed(3)}
+            </td>
+            <td></td>
+            <td></td>
           </tr>
-        </tbody>
+        </tfoot>
       </table>
-    </div>
+    </>
   );
 }
 
