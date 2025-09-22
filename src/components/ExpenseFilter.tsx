@@ -1,21 +1,24 @@
+import { categories } from "../categories";
 
-interface FilterProps{
-    onSelectCategory: (category: string) => void; 
+interface FilterProps {
+  onSelectCategory: (category: string) => void;
 }
 
-function ExpenseFilter({onSelectCategory}: FilterProps) {
+function ExpenseFilter({ onSelectCategory }: FilterProps) {
   return (
     <select
       className="form-select"
       onChange={(event) => onSelectCategory(event.target.value)}
     >
       <option value="">All Categories</option>
-      <option value="Stationaries">Stationaries</option>
-      <option value="Food Stuff">Food Stuff</option>
-      <option value="Cleaning Materials">Cleaning Materials</option>
-      <option value="Transport">Transport</option>
+      {/* Populating categories automatically */}
+      {categories.map((category) => (
+        <option key={category} value={category}>
+          {category}
+        </option>
+      ))}
     </select>
   );
 }
 
-export default ExpenseFilter
+export default ExpenseFilter;

@@ -1,5 +1,6 @@
 import { useForm, type FieldValues } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { categories } from "../categories";
 import { z } from "zod";
 import { useState } from "react";
 
@@ -10,10 +11,7 @@ const validationsSchema = z.object({
     .min(3, { message: "Too small description!" })
     .max(20, { message: "Too long description!" }),
   amount: z.number({ message: "Expense amount is required!" }).min(1),
-  categories: z.enum(
-    ["Stationaries", "Food Stuff", "Cleaning Materials", "Transport"],
-    { message: "Please select a category!" }
-  ),
+  categories: z.enum(categories, { message: "Please select a category!" }),
 });
 
 // Getting the typescript type for the zod schema to instruct the form on type of data to be accepted
@@ -78,10 +76,12 @@ function ExpenseForm() {
             className="form-select"
           >
             <option value="">Select the category of your expense</option>
-            <option value="Stationaries">Stationaries</option>
-            <option value="Food Stuff">Food Stuff</option>
-            <option value="Cleaning Materials">Cleaning Materials</option>
-            <option value="Transport">Transport</option>
+            {/* Populating categories automatically */}
+            {categories.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
           </select>
           {errors.categories && (
             <p className="text-danger">{errors.categories.message}</p>
