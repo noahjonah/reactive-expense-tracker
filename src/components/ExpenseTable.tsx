@@ -1,6 +1,12 @@
 
 
-function ExpenseTable() {
+interface ExpenseTableProps {
+  expense: { description: string; amount: number; categories: string };
+}
+
+function ExpenseTable({ expense }: ExpenseTableProps) {
+  console.log(expense);
+
   return (
     <div className="container mt-3">
       <form className="mb-4">
@@ -30,9 +36,9 @@ function ExpenseTable() {
         </thead>
         <tbody>
           <tr>
-            <td>Milk</td>
-            <td>$ 5.00</td>
-            <td>Food Stuff</td>
+            <td>{expense.description}</td>
+            <td>$ {expense.amount}</td>
+            <td>{expense.categories}</td>
             <td>
               <button className="btn btn-danger">DELETE</button>
             </td>

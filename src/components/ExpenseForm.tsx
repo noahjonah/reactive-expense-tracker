@@ -1,6 +1,7 @@
 import { useForm, type FieldValues } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useState } from "react";
 
 // Zod validation rules(schema) for category, description and amount fields
 const validationsSchema = z.object({
@@ -27,8 +28,10 @@ function ExpenseForm() {
     resolver: zodResolver(validationsSchema),
   });
 
+  let [expense, setExpense] = useState({});
+
   // Data submition logic
-  const onSubmit = (data: FieldValues) => console.log(data);
+  const onSubmit = (data: FieldValues) => setExpense((expense = data));
 
   return (
     <>
