@@ -15,25 +15,39 @@ function App() {
 
   const [selectedCategory, setSelectedCategory] = useState("");
 
-  const showExpensesOfCategory = selectedCategory
+  const showExpensesOfCategoryType = selectedCategory
     ? expenses.filter((e) => e.category === selectedCategory)
     : expenses;
 
   return (
     <div className="container">
       <h3 className="mb-2">Reactive Expense Tracker</h3>
-      <ExpenseForm></ExpenseForm>
+      <ExpenseForm
+        onSubmit={(newExpense) =>
+          setExpenses([
+            ...expenses,
+            {
+              ...newExpense,
+              id: expenses.length + 1,
+            },
+          ])
+        }
+      ></ExpenseForm>
 
-      <div className="mb-3">
-        <ExpenseFilter
-          onSelectCategory={(category) => setSelectedCategory(category)}
-        ></ExpenseFilter>
-      </div>
+      {/* Expense result -> filter and table */}
+      <>
+        <h4 className="mb-3">Logged Expenses</h4>
+        <div className="mb-3">
+          <ExpenseFilter
+            onSelectCategory={(category) => setSelectedCategory(category)}
+          ></ExpenseFilter>
+        </div>
 
-      <ExpenseTable
-        expenses={showExpensesOfCategory}
-        onDelete={(id) => setExpenses(expenses.filter((e) => e.id !== id))}
-      ></ExpenseTable>
+        <ExpenseTable
+          expenses={showExpensesOfCategoryType}
+          onDelete={(id) => setExpenses(expenses.filter((e) => e.id !== id))}
+        ></ExpenseTable>
+      </>
     </div>
   );
 }

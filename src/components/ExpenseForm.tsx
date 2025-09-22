@@ -2,7 +2,6 @@ import { useForm, type FieldValues } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { categories } from "../categories";
 import { z } from "zod";
-import { useState } from "react";
 
 // Zod validation rules(schema) for category, description and amount fields
 const validationsSchema = z.object({
@@ -11,29 +10,35 @@ const validationsSchema = z.object({
     .min(3, { message: "Too small description!" })
     .max(20, { message: "Too long description!" }),
   amount: z.number({ message: "Expense amount is required!" }).min(1),
-  categories: z.enum(categories, { message: "Please select a category!" }),
+  category: z.enum(categories, { message: "Please select a category!" }),
 });
 
 // Getting the typescript type for the zod schema to instruct the form on type of data to be accepted
 type ExpenseFormData = z.infer<typeof validationsSchema>;
 
-function ExpenseForm() {
+interface FormProps {
+  onSubmit: (data: ExpenseFormData) => void;
+}
+
+function ExpenseForm({ onSubmit }: FormProps) {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isValid },
   } = useForm<ExpenseFormData>({
     resolver: zodResolver(validationsSchema),
   });
 
-  let [expenses, setExpense] = useState({});
-
-  // Data submition logic
-  const onSubmit = (data: FieldValues) => setExpense((expenses = data));
-
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} className="container mt-4 mb-5">
+      <form
+        onSubmit={handleSubmit((data) => {
+          onSubmit(data);
+          reset(); // Reset form fields to blank
+        })}
+        className="container mt-4 mb-5"
+      >
         {/* Description Section */}
         <fieldset className="mb-3">
           <label htmlFor="description" className="form-label">
@@ -72,7 +77,7 @@ function ExpenseForm() {
           </label>
           <select
             id="categories"
-            {...register("categories")}
+            {...register("category")}
             className="form-select"
           >
             <option value="">Select the category of your expense</option>
@@ -83,8 +88,8 @@ function ExpenseForm() {
               </option>
             ))}
           </select>
-          {errors.categories && (
-            <p className="text-danger">{errors.categories.message}</p>
+          {errors.category && (
+            <p className="text-danger">{errors.category.message}</p>
           )}
         </fieldset>
         <button
